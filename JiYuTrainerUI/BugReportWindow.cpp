@@ -21,7 +21,7 @@ INT_PTR CALLBACK BugReportDlgFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 
 		SendMessage(hDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadIcon(currentApp->GetInstance(), MAKEINTRESOURCE(IDI_BUG)));
 		SendMessage(hDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIcon(currentApp->GetInstance(), MAKEINTRESOURCE(IDI_BUG)));
-		SetDlgItemText(hDlg, IDC_BUGREPORT_CONTENT, L"ÎÞ·¨»ñÈ¡³ÌÐò´íÎóÈÕÖ¾");
+		SetDlgItemText(hDlg, IDC_BUGREPORT_CONTENT, L"Sorry,æ— æ³•èŽ·å–ç¨‹åºé”™è¯¯æ—¥å¿—");
 		CheckDlgButton(hDlg, IDC_REBOOT, BST_CHECKED);
 
 		int  appArgCount = currentApp->GetCommandLineArraySize();
@@ -56,11 +56,11 @@ INT_PTR CALLBACK BugReportDlgFunc(HWND hDlg, UINT message, WPARAM wParam, LPARAM
 		case IDOK: {
 			if (JUpdater_CheckInternet()) {
 				Sleep(2000);
-				MessageBox(hDlg, L"ÄúµÄ´íÎó±¨¸æÒÑ³É¹¦Ìá½»£¬¸ÐÐ»ÄúµÄÖ§³Ö£¡", L"JiYuTrainer", MB_ICONINFORMATION);
+				MessageBox(hDlg, L"æ‚¨çš„é”™è¯¯æŠ¥å‘Šå·²æˆåŠŸæäº¤ï¼Œæ„Ÿè°¢æ‚¨çš„æ”¯æŒï¼", L"JiYuTrainer", MB_ICONINFORMATION);
 				EndDialog(hDlg, LOWORD(wParam));
 			}
 			else {
-				MessageBox(hDlg, L"ÎÞ·¨Ìá½»´íÎó±¨¸æ£¬¿ÉÄÜÊÇÍøÂçÎ´Á¬½Ó£¿", L"JiYuTrainer", MB_ICONEXCLAMATION);
+				MessageBox(hDlg, L"æ— æ³•æäº¤é”™è¯¯æŠ¥å‘Šï¼Œå¯èƒ½æ˜¯ç½‘ç»œæœªè¿žæŽ¥ï¼Ÿ", L"JiYuTrainer", MB_ICONEXCLAMATION);
 			}
 			if (IsDlgButtonChecked(hDlg, IDC_REBOOT))
 				SysHlp::RunApplication(currentApp->GetFullPath(), L"-r3");
