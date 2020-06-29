@@ -20,19 +20,19 @@
 #include "../JiYuTrainerUI/MainWindow.h"
 #pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #define CMD_HELP L"\
-π§æﬂ√¸¡Ó£∫\n\
--install-full ø™ ºÕÍ’˚∞≤◊∞√¸¡Ó\n\
--config       ¥Úø™ JiYuTrainer ∏ﬂº∂≈‰÷√\n\
--hidden       æ≤ƒ¨‘À––ƒ£ Ω\n\
--killst       …±À¿º´”ÚµÁ◊”ΩÃ “\n\
+Â∑•ÂÖ∑ÂëΩ‰ª§Ôºö\n\
+-install-full ÂºÄÂßãÂÆåÊï¥ÂÆâË£ÖÂëΩ‰ª§\n\
+-config       ÊâìÂºÄ KaliJiYuHuier È´òÁ∫ßËÆæÁΩÆ\n\
+-hidden       ÈùôÈªòËøêË°åÊ®°Âºè\n\
+-killst       ÊùÄÊ≠ªÊûÅÂüüÁîµÂ≠êÊïôÂÆ§\n\
 \n\
-µ˜ ‘√¸¡Ó£∫\n\
+Ë∞ÉËØïÂëΩ‰ª§Ôºö\n\
 -bugreport -bugfile [bugFilePath]\n\
 -break\n\
 -crash-test\n\
 -force-md5-check\n\
 \n\
-≥Ã–Úƒ⁄≤ø√¸¡Ó£∫\n\
+Á®ãÂ∫èÂÜÖÈÉ®ÂëΩ‰ª§Ôºö\n\
 -f [sourceFilePath]\n\
 -r[1|2|3]\n\
 -ic\n\
@@ -58,16 +58,16 @@ JTAppInternal::~JTAppInternal()
 
 int JTAppInternal::CheckAndInstall()
 {
-	// «ø…“∆∂Ø…Ë±∏÷–±»»ÁU≈Ã
+	//ÊòØÂèØÁßªÂä®ËÆæÂ§á‰∏≠ÊØîÂ¶ÇUÁõò
 	if (!appIsInstaller && !appForceIntallInCurrentDir && SysHlp::CheckIsPortabilityDevice(fullDir.c_str()))
 	{
-		//‘Ú∏¥÷∆±æÃÂ∫Õini÷¡¡Ÿ ±ƒø¬º£¨»ª∫Û π”√bat∆Ù∂Ø£®ø…“‘≤ª’º”√u≈Ã£¨∑Ω±„µØ≥ˆ£©
-		//¥¥Ω®¡Ÿ ±ƒø¬º
+		//ÂàôÂ§çÂà∂Êú¨‰ΩìÂíåiniËá≥‰∏¥Êó∂ÁõÆÂΩïÔºåÁÑ∂Âêé‰ΩøÁî®batÂêØÂä®ÔºàÂèØ‰ª•‰∏çÂç†Áî®uÁõòÔºåÊñπ‰æøÂºπÂá∫Ôºâ
+		//ÂàõÂª∫‰∏¥Êó∂ÁõÆÂΩï
 		WCHAR szTempPath[MAX_PATH];
 		GetTempPath(MAX_PATH, szTempPath);
 		wcscat_s(szTempPath, L"\\JiYuTrainer");
 		if (!Path::Exists(szTempPath) && !CreateDirectory(szTempPath, NULL)) {
-			appLogger->LogError2(L"¥¥Ω®¡Ÿ ±ƒø¬º ß∞‹£∫%s (%d)", PRINT_LAST_ERROR_STR);
+			appLogger->LogError2(L"ÂàõÂª∫‰∏¥Êó∂ÁõÆÂΩïÂ§±Ë¥•Ôºö%s (%d)", PRINT_LAST_ERROR_STR);
 			return -1;
 		}
 		WCHAR szTempMainPath[MAX_PATH];
@@ -76,15 +76,15 @@ int JTAppInternal::CheckAndInstall()
 		wcscat_s(szTempMainPath, L"\\JiYuTrainer.exe");
 		wcscpy_s(szTempMainStartBatPath, szTempPath);
 		wcscat_s(szTempMainStartBatPath, L"\\JiYuTrainerStart.bat");
-		//∏¥÷∆±æÃÂ
+		//Â§çÂà∂Êú¨‰Ωì
 		if (!CopyFile(fullPath.c_str(), szTempMainPath, FALSE)) {
-			appLogger->LogError2(L"¥¥Ω®÷˜≥Ã–Ú ß∞‹£∫%s (%d)", PRINT_LAST_ERROR_STR);
+			appLogger->LogError2(L"ÂàõÂª∫‰∏ªÁ®ãÂ∫èÂ§±Ë¥•Ôºö%s (%d)", PRINT_LAST_ERROR_STR);
 			return -1;
 		}
 
 		bool useBatStart = false;
 
-		//–¥»Î∆Ù∂Øbat
+		//ÂÜôÂÖ•ÂêØÂä®bat
 		std::wstring szTempMainStartBatPathwz;
 		std::wstring szTempMainStartBatPathct = FormatString(L"start \"\" \"%s\" -f \"%s\"\nexit", szTempMainPath, fullPath.c_str());
 		szTempMainStartBatPathwz = szTempMainStartBatPath;
@@ -92,7 +92,7 @@ int JTAppInternal::CheckAndInstall()
 
 		appLogger->Log(L"Installer finish, start app : %s", szTempMainPath);
 
-		//∆Ù∂Ø exe ≤¢◊™Ωªøÿ÷∆»®
+		//ÂêØÂä® exe Âπ∂ËΩ¨‰∫§ÊéßÂà∂ÊùÉ
 		std::wstring runBatContent;
 		if(useBatStart)
 			runBatContent = FormatString(L"/c start \"\" \"%s\"", szTempMainStartBatPath);
@@ -100,53 +100,53 @@ int JTAppInternal::CheckAndInstall()
 			runBatContent = FormatString(L"/c start \"\" \"%s\" -f \"%s\"", szTempMainPath, fullPath.c_str());
 		appIsInstaller = true;
 		if (!SysHlp::RunApplicationPriviledge(L"cmd", runBatContent.c_str())) {
-			appLogger->LogError2(L"∆Ù∂Ø÷˜≥Ã–Ú ß∞‹£∫%s (%d)", PRINT_LAST_ERROR_STR);
+			appLogger->LogError2(L"ÂêØÂä®‰∏ªÁ®ãÂ∫èÂ§±Ë¥•Ôºö%s (%d)", PRINT_LAST_ERROR_STR);
 			return -1;
 		}
 		return 0;
 	}
 
-	//∞≤◊∞HOOK dll
+	//ÂÆâË£ÖHOOK dll
 	if (!Path::Exists(fullHookerPath) && InstallResFile(hInstance, MAKEINTRESOURCE(IDR_DLL_HOOKS), L"BIN", fullHookerPath.c_str()) != EXTRACT_RES::ExtractSuccess)
 		return -1;
-	//∞≤◊∞Sciter dll
+	//ÂÆâË£ÖSciter dll
 	if (!Path::Exists(fullSciterPath) && !InstallSciter())
 		return -1;
 
-	//º”‘ÿ¡Ω∏ˆƒ£øÈ
+	//Âä†ËΩΩ‰∏§‰∏™Ê®°Âùó
 	LoadLibrary(fullHookerPath.c_str());
 	if (!LoadLibrary(fullSciterPath.c_str())) {
-		appLogger->LogError2(L"ƒ£øÈ Sciter.dll º”‘ÿ ß∞‹£∫%s (%d)", PRINT_LAST_ERROR_STR);
+		appLogger->LogError2(L"Ê®°Âùó Sciter.dll Âä†ËΩΩÂ§±Ë¥•Ôºö%s (%d)", PRINT_LAST_ERROR_STR);
 		return -1;
 	}
 
-	//∞≤◊∞«˝∂ØŒƒº˛
+	//ÂÆâË£ÖÈ©±Âä®Êñá‰ª∂
 	if (XTestDriverCanUse() && !Path::Exists(fullDriverPath))
 		InstallResFile(hInstance, MAKEINTRESOURCE(IDR_DLL_DRIVER), L"BIN", fullDriverPath.c_str());
 
-	//∏¸–¬∆˜
+	//Êõ¥Êñ∞Âô®
 	if (appIsInstaller) {
-		//–Î∏¸–¬÷˜exe
+		//È°ªÊõ¥Êñ∞‰∏ªexe
 		std::wstring mainExePath = fullDir + L"\\JiYuTrainer.exe";
 		if (Path::Exists(mainExePath) && !DeleteFile(mainExePath.c_str())) {
-			appLogger->LogError2(L"Œﬁ∑®∏¸–¬‘≠÷˜exe £∫%s (%d)", PRINT_LAST_ERROR_STR);
+			appLogger->LogError2(L"Êó†Ê≥ïÊõ¥Êñ∞Âéü‰∏ªexe Ôºö%s (%d)", PRINT_LAST_ERROR_STR);
 			return -1;
 		}
-		//∏¸–¬¿¥‘¥exe
+		//Êõ¥Êñ∞Êù•Ê∫êexe
 		if (Path::Exists(fullSourceInstallerPath) && DeleteFile(fullSourceInstallerPath.c_str()) && !CopyFile(fullPath.c_str(), fullSourceInstallerPath.c_str(), TRUE)) 
-			appLogger->LogError2(L"Œﬁ∑®∏¸–¬‘≠‘¥ exe £∫%s (%d) %s", PRINT_LAST_ERROR_STR, fullSourceInstallerPath.c_str());
+			appLogger->LogError2(L"Êó†Ê≥ïÊõ¥Êñ∞ÂéüÊ∫ê exe Ôºö%s (%d) %s", PRINT_LAST_ERROR_STR, fullSourceInstallerPath.c_str());
 		if (CopyFile(fullPath.c_str(), mainExePath.c_str(), TRUE)) {
-			//∆Ù∂Ø“—∏¸–¬ÕÍ≥…µƒ÷˜≥Ã–Ú£¨≤¢…æ≥˝±æÃÂ
+			//ÂêØÂä®Â∑≤Êõ¥Êñ∞ÂÆåÊàêÁöÑ‰∏ªÁ®ãÂ∫èÔºåÂπ∂Âà†Èô§Êú¨‰Ωì
 			SysHlp::RunApplicationPriviledge(mainExePath.c_str(), FormatString(L"-rc %s", 300, fullPath.c_str()).c_str());
 			return 0;
 		}
 		else {
-			appLogger->LogError2(L"¥¥Ω®÷˜ exe  ß∞‹£∫%s (%d) %s", PRINT_LAST_ERROR_STR, mainExePath.c_str());
+			appLogger->LogError2(L"ÂàõÂª∫‰∏ª exe Â§±Ë¥•Ôºö%s (%d) %s", PRINT_LAST_ERROR_STR, mainExePath.c_str());
 			return -1;
 		}
 	}
 	else {
-		//º”‘ÿsciter
+		//Âä†ËΩΩsciter
 		HMODULE pSciterdll = LoadLibrary(L"sciter.dll");
 		if (pSciterdll != NULL)
 		{
@@ -171,26 +171,26 @@ int JTAppInternal::CheckAndInstall()
 				}
 			}
 		}*/
-		appLogger->LogError2(L"∂¡»°Œƒº˛ ß∞‹£¨◊ ‘¥Ã·»°¥ÌŒÛ£∫%s (%d)", PRINT_LAST_ERROR_STR);
+		appLogger->LogError2(L"ËØªÂèñÊñá‰ª∂Â§±Ë¥•ÔºåËµÑÊ∫êÊèêÂèñÈîôËØØÔºö%s (%d)", PRINT_LAST_ERROR_STR);
 	}
 
 	return -1;
 }
 void JTAppInternal::UnInstall() 
 {
-	//–∂‘ÿ≤°∂æ
+	//Âç∏ËΩΩÁóÖÊØí
 	if (appWorker) {
 		appWorker->RunOperation(TrainerWorkerOpVirusBoom);
 		appWorker->RunOperation(TrainerWorkerOpForceUnLoadVirus);
 	}
-	//…‘∫Û…æ≥˝±æÃÂ
+	//Á®çÂêéÂà†Èô§Êú¨‰Ωì
 	Sleep(1000);
 
 	if (Path::Exists(fullDriverPath)) DeleteFile(fullDriverPath.c_str());
 	if (Path::Exists(fullLogPath)) DeleteFile(fullLogPath.c_str());
 	if (Path::Exists(fullIniPath)) DeleteFile(fullIniPath.c_str());
 
-	//–¥»Î…æ≥˝±æÃÂexeµƒbat
+	//ÂÜôÂÖ•Âà†Èô§Êú¨‰ΩìexeÁöÑbat
 	std::wstring uninstallBatPath = fullDir + L"\\uninstall-final.bat";
 	std::wstring uninstallBatContent = FormatString(L"@echo off\n@ping 127.0.0.1 -n 6 > nul\ndel /F /Q %s\
 \ndel /F /Q %s\ndel /F /Q %s\ndel %%%%0", fullPath.c_str(), fullHookerPath.c_str(), fullSciterPath.c_str());
@@ -216,7 +216,7 @@ BOOL JTAppInternal::InstallSciter() {
 	HANDLE hFile = CreateFile(fullSciterPath.c_str(), GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		appLogger->LogError2(L"¥¥Ω®ƒ£øÈŒƒº˛  ß∞‹£∫%s (%d)  %s", PRINT_LAST_ERROR_STR, fullSciterPath.c_str());
+		appLogger->LogError2(L"ÂàõÂª∫Ê®°ÂùóÊñá‰ª∂ Â§±Ë¥•Ôºö%s (%d)  %s", PRINT_LAST_ERROR_STR, fullSciterPath.c_str());
 		return FALSE;
 	}
 
@@ -261,7 +261,7 @@ RETURN:
 }
 EXTRACT_RES JTAppInternal::InstallResFile(HINSTANCE resModule, LPWSTR resId, LPCWSTR resType, LPCWSTR extractTo)
 {
-	appLogger->Log(L"∞≤◊∞ƒ£øÈŒƒº˛£∫(%d) %s", resId, extractTo);
+	appLogger->Log(L"ÂÆâË£ÖÊ®°ÂùóÊñá‰ª∂Ôºö(%d) %s", resId, extractTo);
 
 	EXTRACT_RES result = ExtractUnknow;
 	HRSRC hResource = NULL;
@@ -273,7 +273,7 @@ EXTRACT_RES JTAppInternal::InstallResFile(HINSTANCE resModule, LPWSTR resId, LPC
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
 		result = ExtractCreateFileError;
-		appLogger->LogError2(L"¥¥Ω®ƒ£øÈŒƒº˛  ß∞‹£∫%s (%d)  %s", PRINT_LAST_ERROR_STR, extractTo);
+		appLogger->LogError2(L"ÂàõÂª∫Ê®°ÂùóÊñá‰ª∂ Â§±Ë¥•Ôºö%s (%d)  %s", PRINT_LAST_ERROR_STR, extractTo);
 		return result;
 	}
 
@@ -296,7 +296,7 @@ EXTRACT_RES JTAppInternal::InstallResFile(HINSTANCE resModule, LPWSTR resId, LPC
 	dwSize = SizeofResource(resModule, hResource);
 	if (!WriteFile(hFile, pData, dwSize, &writed, NULL)) {
 		result = ExtractWriteFileError;
-		appLogger->LogError2(L"¥¥Ω®ƒ£øÈŒƒº˛ ß∞‹£¨–¥»ÎŒƒº˛¥ÌŒÛ£∫%s (%d) %s ", PRINT_LAST_ERROR_STR, extractTo);
+		appLogger->LogError2(L"ÂàõÂª∫Ê®°ÂùóÊñá‰ª∂Â§±Ë¥•ÔºåÂÜôÂÖ•Êñá‰ª∂ÈîôËØØÔºö%s (%d) %s ", PRINT_LAST_ERROR_STR, extractTo);
 		CloseHandle(hFile);
 		return result;
 	}
@@ -307,7 +307,7 @@ EXTRACT_RES JTAppInternal::InstallResFile(HINSTANCE resModule, LPWSTR resId, LPC
 	return result;
 
 RETURN:
-	appLogger->LogError2(L"¥¥Ω®ƒ£øÈŒƒº˛ ß∞‹£¨◊ ‘¥Ã·»°¥ÌŒÛ£∫%s (%d) %s ", PRINT_LAST_ERROR_STR, extractTo);
+	appLogger->LogError2(L"ÂàõÂª∫Ê®°ÂùóÊñá‰ª∂Â§±Ë¥•ÔºåËµÑÊ∫êÊèêÂèñÈîôËØØÔºö%s (%d) %s ", PRINT_LAST_ERROR_STR, extractTo);
 	CloseHandle(hFile);
 	return result;
 }
@@ -365,7 +365,7 @@ bool JTAppInternal::CheckAntiVirusSoftware(bool showTip) {
 		|| MRegCheckUninstallItemExists(wstr3603))
 		existsAntiVirus += L"360";
 	if (MRegCheckUninstallItemExists(wstrDb1))
-		existsAntiVirus += L"°¢Ω…Ω∂æ∞‘";
+		existsAntiVirus += L"„ÄÅÈáëÂ±±ÊØíÈú∏";
 
 	if (existsAntiVirus != L"") {
 		if (showTip)  _DialogBoxParamW(hInstance, MAKEINTRESOURCE(IDD_DIALOG_AVTIP), NULL, AVTipWndProc, (LPARAM)this);
@@ -388,7 +388,7 @@ int JTAppInternal::Run(int nCmdShow)
 	this->Exit(appResult);
 	return appResult;
 }
-int JTAppInternal::RunCheckRunningApp()//»Áπ˚≥Ã–Ú“—æ≠”–“ª∏ˆ‘⁄‘À––£¨‘Ú∑µªÿtrue
+int JTAppInternal::RunCheckRunningApp()//Â¶ÇÊûúÁ®ãÂ∫èÂ∑≤ÁªèÊúâ‰∏Ä‰∏™Âú®ËøêË°åÔºåÂàôËøîÂõûtrue
 {
 	HWND oldWindow = FindWindow(MAIN_WND_CLS_NAME, MAIN_WND_NAME);
 	if (oldWindow != NULL) {
@@ -423,7 +423,7 @@ int JTAppInternal::RunInternal()
 	MLoadNt();
 
 	if (SysHlp::GetSystemVersion() == SystemVersionNotSupport) {
-		appLogger->LogError2(L"œµÕ≥∞Ê±æ≤ª÷ß≥÷±æ»Ìº˛µƒ‘À––");
+		appLogger->LogError2(L"Á≥ªÁªüÁâàÊú¨‰∏çÊîØÊåÅÊú¨ËΩØ‰ª∂ÁöÑËøêË°å");
 		return APP_FAIL_SYSTEM_NOT_SUPPORT;
 	}
 
@@ -431,7 +431,7 @@ int JTAppInternal::RunInternal()
 	InitLogger();
 	InitPath();
 
-	//÷∏∂®»’÷æŒ™Œƒº˛ƒ£ Ω
+	//ÊåáÂÆöÊó•Âøó‰∏∫Êñá‰ª∂Ê®°Âºè
 	appLogger->SetLogOutPut(LogOutPutFile);
 	appLogger->SetLogOutPutFile(fullLogPath.c_str());
 
@@ -455,13 +455,13 @@ int JTAppInternal::RunInternal()
 	if (appCmdHelpMode) {
 		wprintf_s(CMD_HELP);
 		wprintf_s(L"\n");
-		MessageBox(NULL, CMD_HELP, L"JiYuTrainer -√¸¡Ó––Ã· æ", MB_ICONINFORMATION);
+		MessageBox(NULL, CMD_HELP, L"JiYuTrainer -ÂëΩ‰ª§Ë°åÊèêÁ§∫", MB_ICONINFORMATION);
 		return 0;
 	}
 	if (appKillStMode) {
 		TrainerWorkerInternal t;
-		if (t.KillStAuto()) printf_s("“—≥…π¶Ω· ¯º´”ÚµÁ◊”ΩÃ “\n");
-		else printf_s("Œﬁ∑®Ω· ¯º´”ÚµÁ◊”ΩÃ “£¨œÍ«È«Î≤Èø¥»’÷æ\n");
+		if (t.KillStAuto()) printf_s("ÂìàÂìàÔºåÂ∑≤ÊàêÂäüÁªìÊùüÊûÅÂüüÁîµÂ≠êÊïôÂÆ§\n");
+		else printf_s("ÂìîÂìî,Êó†Ê≥ïÁªìÊùüÊûÅÂüüÁîµÂ≠êÊïôÂÆ§ÔºåËØ¶ÊÉÖËØ∑Êü•ÁúãÊó•ÂøóÊñá‰ª∂\n");
 		return 0;
 	}
 	if (!appArgInstallMode) {
@@ -470,7 +470,7 @@ int JTAppInternal::RunInternal()
 	}
 	if (!appArgInstallMode && !appArgeementArgeed && !RunArgeementDialog())
 		return 0;
-	//ƒ£ Ω—°‘Ò 
+	//Ê®°ÂºèÈÄâÊã© 
 
 	if (appIsBugReportMode) {
 		appStartType = AppStartTypeBugReport;
@@ -484,7 +484,7 @@ int JTAppInternal::RunInternal()
 	{
 		Sleep(1000);//Sleep for a while
 
-		//…æ≥˝‘≠”–∏¸–¬≥Ã–Úµƒ±æÃÂ“‘º∞»’÷æ
+		//Âà†Èô§ÂéüÊúâÊõ¥Êñ∞Á®ãÂ∫èÁöÑÊú¨‰Ωì‰ª•ÂèäÊó•Âøó
 		WCHAR updaterLogPath[MAX_PATH];
 		wcscpy_s(updaterLogPath, updaterPath.c_str());
 		PathRenameExtension(updaterLogPath, L".log");
@@ -511,7 +511,7 @@ int JTAppInternal::RunInternal()
 
 	//appLogger->Log(L"SetUnhandledExceptionFilter Prevented: %d", PreventSetUnhandledExceptionFilter());
 	appWorker = new TrainerWorkerInternal();
-	appLogger->Log(L"≥ı ºªØ’˝≥£");
+	appLogger->Log(L"ÂàùÂßãÂåñÊ≠£Â∏∏");
 
 RUN_MAIN:
 
@@ -582,7 +582,7 @@ LPVOID JTAppInternal::RunOperation(AppOperation op)
 	case AppOperationUnLoadDriver: {
 		XCloseDriverHandle();
 		if (XUnLoadDriver())
-			currentLogger->Log(L"«˝∂Ø–∂‘ÿ≥…π¶");
+			currentLogger->Log(L"È©±Âä®Âç∏ËΩΩÊàêÂäü");
 		break;
 	}
 	case AppOperationKReboot:  KFReboot(); break;
@@ -603,7 +603,7 @@ void JTAppInternal::LoadDriver()
 {
 	if (!appForceNoDriver && XLoadDriver())
 		if (!appForceNoSelfProtect && !XInitSelfProtect())
-			currentLogger->LogWarn(L"«˝∂Ø◊‘Œ“±£ª§ ß∞‹£°");
+			currentLogger->LogWarn(L"È©±Âä®Ëá™Êàë‰øùÊä§Â§±Ë¥•ÔºÅ");
 }
 bool JTAppInternal::CheckAppCorrectness() 
 {
@@ -617,8 +617,8 @@ bool JTAppInternal::CheckAppCorrectness()
 	FILETIME file_time;
 	FILETIME locationtime;
 
-	GetFileTime(hFileRead, NULL, NULL, &file_time);//ªÒµ√Œƒº˛–ﬁ∏ƒ ±º‰  
-	FileTimeToLocalFileTime(&file_time, &locationtime);//Ω´Œƒº˛ ±º‰◊™ªªŒ™±æµÿŒƒº˛ ±º‰  
+	GetFileTime(hFileRead, NULL, NULL, &file_time);//Ëé∑ÂæóÊñá‰ª∂‰øÆÊîπÊó∂Èó¥  
+	FileTimeToLocalFileTime(&file_time, &locationtime);//Â∞ÜÊñá‰ª∂Êó∂Èó¥ËΩ¨Êç¢‰∏∫Êú¨Âú∞Êñá‰ª∂Êó∂Èó¥  
 	FileTimeToSystemTime(&locationtime, &time);
 
 	CloseHandle(hFileRead);
@@ -747,7 +747,7 @@ INT_PTR CALLBACK JTAppInternal::AVTipWndProc(HWND hDlg, UINT message, WPARAM wPa
 
 		SendMessage(hDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APP_MAIN)));
 		SendMessage(hDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APP_MAIN)));
-		SetDlgItemText(hDlg, IDC_MESSAGE, FormatString(L"Œ“√«ºÏ≤‚µΩƒ˙µƒº∆À„ª˙…œ∞≤◊∞¡À %s …±∂æ»Ìº˛£¨“ÚŒ™ JiYuTrainer ª·∂‘º´”ÚΩ¯––≤Ÿ◊˜£¨ø…ƒ‹ª·±ª…±∂æ»Ìº˛ŒÛ ∂±Œ™≤°∂æ°£\n“Ú¥ÀŒ“√«Ω®“Èƒ˙ πÿ±’…±∂æ»Ìº˛ ªÚ ÃÌº”±æ»Ìº˛÷¡∞◊√˚µ•°£", ((JTAppInternal*)lParam)->existsAntiVirus.c_str()).c_str());
+		SetDlgItemText(hDlg, IDC_MESSAGE, FormatString(L"Êàë‰ª¨Ê£ÄÊµãÂà∞ÊÇ®ÁöÑËÆ°ÁÆóÊú∫‰∏äÂÆâË£Ö‰∫Ü %s ÊùÄÊØíËΩØ‰ª∂ÔºåÂõ†‰∏∫ JiYuTrainer ‰ºöÂØπÊûÅÂüüËøõË°åÊìç‰ΩúÔºåÂèØËÉΩ‰ºöË¢´ÊùÄÊØíËΩØ‰ª∂ËØØËØÜÂà´‰∏∫ÁóÖÊØí„ÄÇ\nÂõ†Ê≠§Êàë‰ª¨Âª∫ËÆÆÊÇ® ÂÖ≥Èó≠ÊùÄÊØíËΩØ‰ª∂ Êàñ Ê∑ªÂä†Êú¨ËΩØ‰ª∂Ëá≥ÁôΩÂêçÂçï„ÄÇ", ((JTAppInternal*)lParam)->existsAntiVirus.c_str()).c_str());
 		lResult = TRUE;
 		break;
 	}
@@ -772,8 +772,8 @@ INT_PTR CALLBACK JTAppInternal::ArgeementWndProc(HWND hDlg, UINT message, WPARAM
 		SendMessage(hDlg, WM_SETICON, ICON_SMALL, (LPARAM)LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APP_MAIN)));
 		SendMessage(hDlg, WM_SETICON, ICON_BIG, (LPARAM)LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APP_MAIN)));
 
-		hFontRed = CreateFontW(20, 0, 0, 0, 0, FALSE, FALSE, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, L"ÀŒÃÂ");//¥¥Ω®◊÷ÃÂ
-		SendDlgItemMessage(hDlg, IDC_STATIC_RED, WM_SETFONT, (WPARAM)hFontRed, TRUE);//∑¢ÀÕ…Ë÷√◊÷ÃÂœ˚œ¢
+		hFontRed = CreateFontW(20, 0, 0, 0, 0, FALSE, FALSE, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, L"ÂÆã‰Ωì");//ÂàõÂª∫Â≠ó‰Ωì
+		SendDlgItemMessage(hDlg, IDC_STATIC_RED, WM_SETFONT, (WPARAM)hFontRed, TRUE);//ÂèëÈÄÅËÆæÁΩÆÂ≠ó‰ΩìÊ∂àÊÅØ
 
 		lResult = TRUE;
 		break;
